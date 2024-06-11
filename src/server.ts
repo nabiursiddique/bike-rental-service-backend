@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
-import { app } from "./app";
-import config from "./config";
+/* eslint-disable no-console */
+import mongoose from 'mongoose';
+import { app } from './app';
+import config from './config';
 
 async function main() {
   try {
@@ -8,7 +9,7 @@ async function main() {
 
     const port = config.port;
     app.listen(port, () => {
-      console.log(`Bike rental app listening on port ${port}`);
+      console.log(`Bike rental app is listening on port ${port}`);
     });
   } catch (err) {
     console.log(err);
