@@ -15,4 +15,11 @@ router.post(
 // get all bikes from db
 router.get('/', BikeControllers.getAllBikes);
 
+// update bike into db
+router.patch(
+  '/:id',
+  validateRequest(bikeValidations.updateBikeValidationSchema),
+  BikeControllers.updateBike,
+);
+
 export const BikeRoutes = router;

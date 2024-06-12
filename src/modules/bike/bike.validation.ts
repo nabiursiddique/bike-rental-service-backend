@@ -16,6 +16,18 @@ const createBikeValidationSchema = z.object({
   brand: z.string().min(1, { message: 'Bike brand is required' }),
 });
 
+const updateBikeValidationSchema = z.object({
+  name: z.string().trim().min(1).optional(),
+  description: z.string().min(1).optional(),
+  pricePerHour: z.number().min(0).optional(),
+  isAvailable: z.boolean().optional().optional(),
+  cc: z.number().min(1).optional(),
+  year: z.number().int().min(1900).optional(),
+  model: z.string().min(1).optional(),
+  brand: z.string().min(1).optional(),
+});
+
 export const bikeValidations = {
   createBikeValidationSchema,
+  updateBikeValidationSchema,
 };
