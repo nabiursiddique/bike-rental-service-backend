@@ -12,4 +12,7 @@ router.post(
   BikeControllers.createBike,
 );
 
+// get all bikes from db
+router.get('/', BikeControllers.getAllBikes);
+
 export const BikeRoutes = router;
