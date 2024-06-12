@@ -22,4 +22,7 @@ router.patch(
   BikeControllers.updateBike,
 );
 
+// delete bike from db
+router.delete('/:id', BikeControllers.deleteBike);
+
 export const BikeRoutes = router;

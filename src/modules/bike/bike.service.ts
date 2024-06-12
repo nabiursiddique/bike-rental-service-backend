@@ -22,8 +22,15 @@ const updateBikeIntoDB = async (id: string, updateData: object) => {
   return result;
 };
 
+//* delete bike from db
+const deleteBikeFromDB = async (id: string) => {
+  const result = await Bike.findByIdAndDelete(id);
+  return result;
+};
+
 export const BikeServices = {
   createBikeIntoDB,
   getAllBikesFromDB,
   updateBikeIntoDB,
+  deleteBikeFromDB,
 };
