@@ -30,11 +30,11 @@ const updateBikeIntoDB = async (id: string, updateData: object) => {
 
 //* delete bike from db
 const deleteBikeFromDB = async (id: string) => {
-  const result = await Bike.findByIdAndUpdate(
-    id,
-    { isAvailable: false },
-    { new: true },
-  );
+  const bike = await Bike.findById(id);
+  if (!bike) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Bike not found');
+  }
+  const result = await Bike.findByIdAndDelete(id);
   return result;
 };
 
