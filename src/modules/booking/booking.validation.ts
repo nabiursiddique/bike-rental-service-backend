@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const bookingSchema = z.object({
+const bookingValidationSchema = z.object({
   userId: z.string().min(1, { message: 'User Id is required' }),
   bikeId: z.string().min(1, { message: 'Bike Id is required' }),
   startTime: z.date({ required_error: 'Start time is required' }),
@@ -9,4 +9,6 @@ const bookingSchema = z.object({
   isReturned: z.boolean({ required_error: 'Is Returned is required' }),
 });
 
-export default bookingSchema;
+export const bookingValidations = {
+  bookingValidationSchema,
+};
