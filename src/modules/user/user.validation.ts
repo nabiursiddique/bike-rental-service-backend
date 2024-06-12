@@ -13,6 +13,6 @@ const createUserValidationSchema = z.object({
   role: z.enum(['admin', 'user']).optional(),
 });
 
-export const userValidations = {
+export const UserValidations = {
   createUserValidationSchema,
 };

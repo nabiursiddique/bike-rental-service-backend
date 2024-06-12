@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-unused-vars */
 import { Schema, model } from 'mongoose';
-import { TUser } from './user.interface';
+import { TUserSignUp, UserModel } from './user.interface';
 
-const userSchema = new Schema<TUser>(
+const userSchema = new Schema<TUserSignUp>(
   {
     name: {
       type: String,
@@ -40,4 +43,11 @@ const userSchema = new Schema<TUser>(
   },
 );
 
-export const User = model<TUser>('User', userSchema);
+// static method for removing password after signup of an user
+userSchema.statics.removePassword = async function (payload: any) {
+  const removePassword = payload.toObject();
+  const { password, ...userWithoutPassword } = removePassword;
+  return userWithoutPassword;
+};
+
+export const User = model<TUserSignUp, UserModel>('User', userSchema);
