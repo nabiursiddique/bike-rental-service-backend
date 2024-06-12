@@ -1,3 +1,5 @@
+import httpStatus from 'http-status';
+import AppError from '../../errors/appError';
 import { TBike } from './bike.interface';
 import { Bike } from './bike.model';
 
@@ -15,6 +17,10 @@ const getAllBikesFromDB = async () => {
 
 //* update bike into db
 const updateBikeIntoDB = async (id: string, updateData: object) => {
+  const bike = await Bike.findById(id);
+  if (!bike) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Bike not found');
+  }
   const result = await Bike.findByIdAndUpdate(id, updateData, {
     new: true,
     runValidators: true,
