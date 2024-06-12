@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const userValidationSchema = z.object({
+const createUserValidationSchema = z.object({
   name: z.string().trim().min(1, { message: 'Name is required' }),
   email: z
     .string()
@@ -14,5 +14,5 @@ const userValidationSchema = z.object({
 });
 
 export const userValidations = {
-  userValidationSchema,
+  createUserValidationSchema,
 };

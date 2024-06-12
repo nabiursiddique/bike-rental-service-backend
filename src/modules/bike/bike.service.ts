@@ -24,7 +24,11 @@ const updateBikeIntoDB = async (id: string, updateData: object) => {
 
 //* delete bike from db
 const deleteBikeFromDB = async (id: string) => {
-  const result = await Bike.findByIdAndDelete(id);
+  const result = await Bike.findByIdAndUpdate(
+    id,
+    { isAvailable: false },
+    { new: true },
+  );
   return result;
 };
 
