@@ -1,15 +1,12 @@
 import { z } from 'zod';
 
-const bikeValidationSchema = z.object({
+const createBikeValidationSchema = z.object({
   name: z.string().trim().min(1, { message: 'Bike model name is required' }),
-  description: z
-    .string()
-    .trim()
-    .min(1, { message: 'Bike description is required' }),
+  description: z.string().min(1, { message: 'Bike description is required' }),
   pricePerHour: z
     .number()
     .min(0, { message: 'Bike price per hour is required' }),
-  isAvailable: z.boolean({ required_error: 'Bike availability is required' }),
+  isAvailable: z.boolean().optional(),
   cc: z.number().min(1, { message: 'Bike cc is required' }),
   year: z
     .number()
@@ -20,5 +17,5 @@ const bikeValidationSchema = z.object({
 });
 
 export const bikeValidations = {
-  bikeValidationSchema,
+  createBikeValidationSchema,
 };
