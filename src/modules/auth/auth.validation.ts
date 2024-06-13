@@ -13,6 +13,16 @@ const createUserValidationSchema = z.object({
   role: z.enum(['admin', 'user']).optional(),
 });
 
+const logInUserValidationSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .email({ message: 'Invalid email' })
+    .min(1, { message: 'Email is required' }),
+  password: z.string().min(1, { message: 'Password is required' }),
+});
+
 export const AuthValidations = {
   createUserValidationSchema,
+  logInUserValidationSchema,
 };

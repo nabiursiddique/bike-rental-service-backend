@@ -3,9 +3,9 @@
 /* eslint-disable no-unused-vars */
 import { Schema, model } from 'mongoose';
 import { TUser } from './user.interface';
-import { TUserSignUp, UserModel } from '../auth/auth.interface';
+import { TUserSignUp, AuthModel } from '../auth/auth.interface';
 
-const userSchema = new Schema<TUser>(
+const userSchema = new Schema<TUser, AuthModel>(
   {
     name: {
       type: String,
@@ -51,4 +51,4 @@ userSchema.statics.removePassword = async function (payload: any) {
   return userWithoutPassword;
 };
 
-export const User = model<TUserSignUp, UserModel>('User', userSchema);
+export const User = model<TUserSignUp, AuthModel>('User', userSchema);

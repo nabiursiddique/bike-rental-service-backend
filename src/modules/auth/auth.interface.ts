@@ -14,8 +14,13 @@ export interface TUserSignUp {
   role: UserRole;
 }
 
+export type TUserLogIn = {
+  email: string;
+  password: string;
+};
+
 // extend on user model
-export interface UserModel extends Model<TUserSignUp> {
+export interface AuthModel extends Model<TUserSignUp> {
   removePassword(payload: any): Partial<TUserSignUp>;
 }
 
