@@ -2,9 +2,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
 import { Schema, model } from 'mongoose';
-import { TUserSignUp, UserModel } from './user.interface';
+import { TUser } from './user.interface';
+import { TUserSignUp, UserModel } from '../auth/auth.interface';
 
-const userSchema = new Schema<TUserSignUp>(
+const userSchema = new Schema<TUser>(
   {
     name: {
       type: String,
