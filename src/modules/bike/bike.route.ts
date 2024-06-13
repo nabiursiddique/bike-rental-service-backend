@@ -21,11 +21,12 @@ router.get('/', BikeControllers.getAllBikes);
 // update bike into db
 router.patch(
   '/:id',
+  auth(USER_ROLE.admin),
   validateRequest(bikeValidations.updateBikeValidationSchema),
   BikeControllers.updateBike,
 );
 
 // delete bike from db
-router.delete('/:id', BikeControllers.deleteBike);
+router.delete('/:id', auth(USER_ROLE.admin), BikeControllers.deleteBike);
 
 export const BikeRoutes = router;
