@@ -17,8 +17,9 @@ const userSignUpIntoDB = async (payload: TUserSignUp) => {
   );
   payload.password = hashPassword;
   const result = await User.create(payload);
-  const resultWithoutPassword = User.removePassword(result);
-  return resultWithoutPassword;
+  const removeField = result.toObject();
+  const { password, ...remainingData } = removeField;
+  return remainingData;
 };
 
 //* user login

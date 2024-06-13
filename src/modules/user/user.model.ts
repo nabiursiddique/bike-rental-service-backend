@@ -3,9 +3,9 @@
 /* eslint-disable no-unused-vars */
 import { Schema, model } from 'mongoose';
 import { TUser } from './user.interface';
-import { TUserSignUp, AuthModel } from '../auth/auth.interface';
+import { TUserSignUp } from '../auth/auth.interface';
 
-const userSchema = new Schema<TUser, AuthModel>(
+const userSchema = new Schema<TUser>(
   {
     name: {
       type: String,
@@ -44,11 +44,4 @@ const userSchema = new Schema<TUser, AuthModel>(
   },
 );
 
-// static method for removing password after signup of an user
-userSchema.statics.removePassword = async function (payload: any) {
-  const removePassword = payload.toObject();
-  const { password, ...userWithoutPassword } = removePassword;
-  return userWithoutPassword;
-};
-
-export const User = model<TUserSignUp, AuthModel>('User', userSchema);
+export const User = model<TUserSignUp>('User', userSchema);
