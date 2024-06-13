@@ -17,12 +17,13 @@ const userSignUp = catchAsync(async (req, res) => {
 // controller for user login
 const userLogin = catchAsync(async (req, res) => {
   const result = await AuthServices.userLoginIntoDB(req.body);
+  const { token, remainingData } = result;
   sendResponse(res, {
     success: true,
     statusCode: 200,
     message: 'User logged in successfully',
-    token: result?.token,
-    data: result?.remainingData,
+    token: token,
+    data: remainingData,
   });
 });
 

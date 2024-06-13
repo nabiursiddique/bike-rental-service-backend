@@ -17,8 +17,11 @@ const userSignUpIntoDB = async (payload: TUserSignUp) => {
   );
   payload.password = hashPassword;
   const result = await User.create(payload);
+
+  // removing password field while sending the response
   const removeField = result.toObject();
   const { password, ...remainingData } = removeField;
+
   return remainingData;
 };
 
@@ -39,7 +42,7 @@ const userLoginIntoDB = async (payload: TUserLogIn) => {
     throw new AppError(httpStatus.FORBIDDEN, 'Password is incorrect');
   }
 
-  // remove the password,createdAt,updatedAt field
+  // removing the password,createdAt,updatedAt field in response
   const removeFields = user.toObject();
   const { password, createdAt, updatedAt, ...remainingData } = removeFields;
 
