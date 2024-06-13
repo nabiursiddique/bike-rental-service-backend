@@ -12,6 +12,8 @@ export interface TUserSignUp {
   phone: string;
   address: string;
   role: UserRole;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export type TUserLogIn = {

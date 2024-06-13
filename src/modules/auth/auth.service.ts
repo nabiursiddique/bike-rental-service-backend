@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import config from '../../config';
 import bcrypt from 'bcrypt';
-import { User } from '../user/user.model';
-import { TUserLogIn, TUserSignUp } from './auth.interface';
-import AppError from '../../errors/appError';
+import jwt from 'jsonwebtoken';
 import httpStatus from 'http-status';
+import { User } from '../user/user.model';
+import AppError from '../../errors/appError';
+import { TUserLogIn, TUserSignUp } from './auth.interface';
 
 //* user sign up
 const userSignUpIntoDB = async (payload: TUserSignUp) => {
@@ -21,19 +24,35 @@ const userSignUpIntoDB = async (payload: TUserSignUp) => {
 //* user login
 const userLoginIntoDB = async (payload: TUserLogIn) => {
   // checking if the user exists
-  const isUserExists = await User.findOne({ email: payload?.email });
-  if (!isUserExists) {
+  const user = await User.findOne({ email: payload?.email });
+  if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'User not found');
   }
 
   // checking if the password is correct or not
   const isPasswordMatched = await bcrypt.compare(
     payload?.password,
-    isUserExists.password,
+    user.password,
   );
   if (!isPasswordMatched) {
     throw new AppError(httpStatus.FORBIDDEN, 'Password is incorrect');
   }
+
+  // remove the password,createdAt,updatedAt field
+  const removeFields = user.toObject();
+  const { password, createdAt, updatedAt, ...remainingData } = removeFields;
+
+  // creating jwt token and sending to the client
+  const jwtPayload = {
+    email: user.email,
+    role: user.role,
+  };
+
+  const accessToken = jwt.sign(jwtPayload, config.jwt_access_secret as string, {
+    expiresIn: '30d',
+  });
+
+  return { token: accessToken, remainingData };
 };
 
 export const AuthServices = {
