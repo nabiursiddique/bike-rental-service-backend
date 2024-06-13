@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-unused-vars */
-import { USER_ROLE } from '../user/user.constant';
-
 type UserRole = 'admin' | 'user';
 
 export interface TUserSignUp {
@@ -19,5 +15,3 @@ export type TUserLogIn = {
   email: string;
   password: string;
 };
-
-export type TUserRole = keyof typeof USER_ROLE;

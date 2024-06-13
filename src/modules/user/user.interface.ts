@@ -1,3 +1,5 @@
+import { USER_ROLE } from './user.constant';
+
 type UserRole = 'admin' | 'user';
 
 export type TUser = {
@@ -8,3 +10,5 @@ export type TUser = {
   address: string;
   role: UserRole;
 };
+
+export type TUserRole = keyof typeof USER_ROLE;
