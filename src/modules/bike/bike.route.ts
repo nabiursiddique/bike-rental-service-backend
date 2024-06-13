@@ -19,7 +19,7 @@ router.post(
 router.get('/', BikeControllers.getAllBikes);
 
 // update bike into db
-router.patch(
+router.put(
   '/:id',
   auth(USER_ROLE.admin),
   validateRequest(bikeValidations.updateBikeValidationSchema),
