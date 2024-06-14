@@ -68,6 +68,15 @@ const createRentalIntoDB = async (req: Request) => {
   }
 };
 
+//* get all rentals for logged in user(my rental)
+const getAllRentalsOfUserFromDB = async (req: Request) => {
+  // getting the signed in user id, email and role from auth
+  const authUser = req.user;
+  const result = await Rental.find({ userId: authUser.userId });
+  return result;
+};
+
 export const RentalServices = {
   createRentalIntoDB,
+  getAllRentalsOfUserFromDB,
 };
