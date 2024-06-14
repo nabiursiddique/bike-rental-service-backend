@@ -2,14 +2,14 @@ import { Response } from 'express';
 
 type TResponse<T> = {
   success: boolean;
-  statusCode: number;
+  statusCode?: number;
   message?: string;
   token?: string;
   data: T;
 };
 
 const sendResponse = <T>(res: Response, data: TResponse<T>) => {
-  res.status(data?.statusCode).json({
+  res.json({
     success: data.success,
     statusCode: data.statusCode,
     message: data.message,
