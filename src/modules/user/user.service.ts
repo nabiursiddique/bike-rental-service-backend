@@ -26,6 +26,14 @@ const getProfileFromDB = async (req: Request) => {
 
 //* update profile into db
 const updateProfileIntoDB = async (req: Request) => {
+  // Restrict user from updating email & password
+  if (req.body.email || req.body.password) {
+    throw new AppError(
+      httpStatus.FORBIDDEN,
+      'Updating email & password is forbidden',
+    );
+  }
+
   // getting profile info from request
   const user = req.user;
 
