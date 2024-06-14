@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { TBooking } from './rental.interface';
+import { TRental } from './rental.interface';
 
-const bookingSchema = new Schema<TBooking>({
+const rentalSchema = new Schema<TRental>({
   userId: {
     type: Schema.Types.ObjectId,
     required: [true, 'User Id is required'],
@@ -20,16 +20,16 @@ const bookingSchema = new Schema<TBooking>({
   },
   returnTime: {
     type: Date,
-    required: true,
+    default: null,
   },
   totalCost: {
     type: Number,
-    required: true,
+    default: 0,
   },
   isReturned: {
     type: Boolean,
-    required: true,
+    default: false,
   },
 });
 
-export const Booking = model<TBooking>('Booking', bookingSchema);
+export const Rental = model<TRental>('Rental', rentalSchema);

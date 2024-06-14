@@ -48,6 +48,7 @@ const userLoginIntoDB = async (payload: TUserLogIn) => {
 
   // creating jwt token and sending to the client
   const jwtPayload = {
+    userId: user._id,
     email: user.email,
     role: user.role,
   };

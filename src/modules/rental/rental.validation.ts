@@ -1,14 +1,23 @@
 import { z } from 'zod';
 
-const bookingValidationSchema = z.object({
-  userId: z.string().min(1, { message: 'User Id is required' }),
+const rentalValidationSchema = z.object({
+  userId: z.string().optional(),
   bikeId: z.string().min(1, { message: 'Bike Id is required' }),
-  startTime: z.date({ required_error: 'Start time is required' }),
-  returnTime: z.date({ required_error: 'Return time is required' }),
-  totalCost: z.number({ required_error: 'Total cost is required' }),
-  isReturned: z.boolean({ required_error: 'Is Returned is required' }),
+  // startTime: z.string().transform((str) => new Date(str)),
+  startTime: z
+    .string()
+    .refine((val) => !isNaN(Date.parse(val)), {
+      message: 'Invalid date string',
+    })
+    .transform((val) => new Date(val)),
+  returnTime: z
+    .date()
+    .optional()
+    .transform((str) => (str ? new Date(str) : null)),
+  totalCost: z.number().optional().default(0),
+  isReturned: z.boolean().optional().default(false),
 });
 
-export const bookingValidations = {
-  bookingValidationSchema,
+export const RentalValidations = {
+  rentalValidationSchema,
 };
