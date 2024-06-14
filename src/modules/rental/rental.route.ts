@@ -7,6 +7,7 @@ import { RentalControllers } from './rental.controller';
 
 const router = express.Router();
 
+// create rental
 router.post(
   '/',
   auth(USER_ROLE.admin, USER_ROLE.user),
@@ -14,6 +15,14 @@ router.post(
   RentalControllers.createRental,
 );
 
+// return rental
+router.put(
+  '/:id/return',
+  auth(USER_ROLE.admin, USER_ROLE.user),
+  RentalControllers.returnRental,
+);
+
+// get all rentals for logged in user
 router.get(
   '/',
   auth(USER_ROLE.admin, USER_ROLE.user),

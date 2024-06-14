@@ -40,7 +40,6 @@ const updateProfileIntoDB = async (req: Request) => {
   // updating profile info in db using email
   const result = await User.findOneAndUpdate({ email: user.email }, req.body, {
     new: true,
-    select: '-__v',
   });
 
   // throwing error if we could not update user
