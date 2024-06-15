@@ -33,10 +33,13 @@ const updateBikeIntoDB = async (id: string, updateData: object) => {
 
 //* delete bike from db
 const deleteBikeFromDB = async (id: string) => {
-  const bike = await Bike.findById(id);
-  if (!bike) {
+  // step01: First update isAvailable to false
+  const updatedBike = await Bike.findByIdAndUpdate(id, { isAvailable: false });
+  if (!updatedBike) {
     throw new AppError(httpStatus.NOT_FOUND, 'Bike not found');
   }
+
+  // step02: delete the bike
   const result = await Bike.findByIdAndDelete(id);
   if (!result) {
     throw new AppError(httpStatus.NOT_IMPLEMENTED, 'Could not delete bike');
