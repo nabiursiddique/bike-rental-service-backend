@@ -25,6 +25,9 @@ const updateBikeIntoDB = async (id: string, updateData: object) => {
     new: true,
     runValidators: true,
   });
+  if (!result) {
+    throw new AppError(httpStatus.NOT_IMPLEMENTED, 'Could not update bike');
+  }
   return result;
 };
 
@@ -35,6 +38,9 @@ const deleteBikeFromDB = async (id: string) => {
     throw new AppError(httpStatus.NOT_FOUND, 'Bike not found');
   }
   const result = await Bike.findByIdAndDelete(id);
+  if (!result) {
+    throw new AppError(httpStatus.NOT_IMPLEMENTED, 'Could not delete bike');
+  }
   return result;
 };
 
