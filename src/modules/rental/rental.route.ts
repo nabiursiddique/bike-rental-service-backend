@@ -18,7 +18,7 @@ router.post(
 // return rental
 router.put(
   '/:id/return',
-  auth(USER_ROLE.admin, USER_ROLE.user),
+  auth(USER_ROLE.admin),
   RentalControllers.returnRental,
 );
 
