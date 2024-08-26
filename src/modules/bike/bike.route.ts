@@ -18,6 +18,9 @@ router.post(
 // get all bikes from db
 router.get('/', BikeControllers.getAllBikes);
 
+// get single bike from db
+router.get('/:id', BikeControllers.getSingleBike);
+
 // update bike into db
 router.put(
   '/:id',

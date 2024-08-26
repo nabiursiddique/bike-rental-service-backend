@@ -15,6 +15,15 @@ const getAllBikesFromDB = async () => {
   return result;
 };
 
+//* get single bike from db
+const getSingleBikeFromDB = async (id: string) => {
+  const bike = await Bike.findById(id);
+  if (!bike) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Bike not found');
+  }
+  return bike;
+};
+
 //* update bike into db
 const updateBikeIntoDB = async (id: string, updateData: object) => {
   const bike = await Bike.findById(id);
@@ -50,6 +59,7 @@ const deleteBikeFromDB = async (id: string) => {
 export const BikeServices = {
   createBikeIntoDB,
   getAllBikesFromDB,
+  getSingleBikeFromDB,
   updateBikeIntoDB,
   deleteBikeFromDB,
 };
