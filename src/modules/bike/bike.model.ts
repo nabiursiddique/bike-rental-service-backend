@@ -12,6 +12,11 @@ const bikeSchema = new Schema<TBike>({
     required: [true, 'Bike description is required'],
     trim: true,
   },
+  image: {
+    type: String,
+    required: [true, 'Bike Image URL is required'],
+    trim: true,
+  },
   pricePerHour: {
     type: Number,
     required: [true, 'Bikes price per hour is required'],
