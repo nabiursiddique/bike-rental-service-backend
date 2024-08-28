@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { User } from './user.model';
 import AppError from '../../errors/appError';
 import httpStatus from 'http-status';
@@ -62,7 +62,14 @@ const updateProfileIntoDB = async (req: Request) => {
   return remainingData;
 };
 
+//* get all users from db
+const getAllUsersFromDB = async () => {
+  const result = await User.find();
+  return result;
+};
+
 export const userServices = {
   getProfileFromDB,
   updateProfileIntoDB,
+  getAllUsersFromDB,
 };
