@@ -25,4 +25,11 @@ router.put(
 // get all users
 router.get('/allUsers', auth(USER_ROLE.admin), UserControllers.getAllUsers);
 
+// update user role
+router.patch(
+  '/updateRole/:id',
+  auth(USER_ROLE.admin),
+  UserControllers.updateUserRole,
+);
+
 export const UserRoutes = router;

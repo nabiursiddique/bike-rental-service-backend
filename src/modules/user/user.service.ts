@@ -68,8 +68,28 @@ const getAllUsersFromDB = async () => {
   return result;
 };
 
+//* update user role by admin
+const updateUserRoleIntoDB = async (id: string, role: string) => {
+  const result = await User.findByIdAndUpdate(
+    id,
+    { role },
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
+  if (!result) {
+    throw new AppError(
+      httpStatus.NOT_IMPLEMENTED,
+      'Could not update user role',
+    );
+  }
+  return result;
+};
+
 export const userServices = {
   getProfileFromDB,
   updateProfileIntoDB,
   getAllUsersFromDB,
+  updateUserRoleIntoDB,
 };
