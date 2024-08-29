@@ -42,9 +42,28 @@ const getAllRentalsOfUser = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const getAllRentals= catchAsync(async (req: Request, res: Response) => {
+  const result = await RentalServices.getAllRentalsFromDB();
+
+  if (result.length === 0) {
+    return res.status(httpStatus.NOT_FOUND).json({
+      success: false,
+      message: 'No Data Found',
+      data: result,
+    });
+  }
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'All rentals retrieved successfully',
+    data: result,
+  });
+});
 
 export const RentalControllers = {
   createRental,
   returnRental,
   getAllRentalsOfUser,
+  getAllRentals
 };

@@ -29,4 +29,11 @@ router.get(
   RentalControllers.getAllRentalsOfUser,
 );
 
+// get all rentals for admin dashboard
+router.get(
+  '/allRentals',
+  auth(USER_ROLE.admin),
+  RentalControllers.getAllRentals,
+);
+
 export const RentalRoutes = router;

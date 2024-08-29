@@ -173,8 +173,15 @@ const getAllRentalsOfUserFromDB = async (req: Request) => {
   return result;
 };
 
+//* get all rentals for admin dashboard
+const getAllRentalsFromDB=async()=>{
+  const result=await Rental.find();
+  return result;
+}
+
 export const RentalServices = {
   createRentalIntoDB,
   returnRentalIntoDB,
   getAllRentalsOfUserFromDB,
+  getAllRentalsFromDB
 };
