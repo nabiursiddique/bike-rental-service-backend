@@ -87,9 +87,19 @@ const updateUserRoleIntoDB = async (id: string, role: string) => {
   return result;
 };
 
+//* Delete user
+const deleteUserFromDB = async (id: string) => {
+  const result = await User.findByIdAndDelete(id);
+  if (!result) {
+    throw new AppError(httpStatus.NOT_IMPLEMENTED, 'Could not delete user');
+  }
+  return result;
+};
+
 export const userServices = {
   getProfileFromDB,
   updateProfileIntoDB,
   getAllUsersFromDB,
   updateUserRoleIntoDB,
+  deleteUserFromDB,
 };
