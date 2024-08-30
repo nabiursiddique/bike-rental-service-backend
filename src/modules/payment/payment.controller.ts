@@ -62,7 +62,6 @@ const paymentConfirmation = async (req: Request, res: Response) => {
             <div class="success-icon">✔</div>
             <h1>Payment Successful!</h1>
             <p>Thank you for your purchase. Your payment has been processed successfully.</p>
-            <a href="https://bike-rental-reservation-system-frontend-dhb7ijyds.vercel.app/" class="btn">Go to Homepage</a>
         </div>
     </body>
     </html>
