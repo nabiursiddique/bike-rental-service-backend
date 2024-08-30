@@ -7,4 +7,5 @@ export interface TRental {
   returnTime?: Date | null;
   totalCost?: number;
   isReturned: boolean;
+  isPaid: boolean;
 }

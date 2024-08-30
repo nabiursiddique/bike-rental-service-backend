@@ -30,6 +30,10 @@ const rentalSchema = new Schema<TRental>({
     type: Boolean,
     default: false,
   },
+  isPaid: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export const Rental = model<TRental>('Rental', rentalSchema);
