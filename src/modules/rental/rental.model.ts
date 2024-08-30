@@ -34,6 +34,10 @@ const rentalSchema = new Schema<TRental>({
     type: Boolean,
     default: false,
   },
+  transactionId: {
+    type: String,
+    default: null,
+  },
 });
 
 export const Rental = model<TRental>('Rental', rentalSchema);

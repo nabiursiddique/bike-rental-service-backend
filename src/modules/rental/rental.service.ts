@@ -4,6 +4,7 @@ import AppError from '../../errors/appError';
 import httpStatus from 'http-status';
 import { Rental } from './rental.model';
 import mongoose from 'mongoose';
+import { initiatePayment } from '../payment/payment.utils';
 
 //* create rental
 const createRentalIntoDB = async (req: Request) => {
@@ -49,6 +50,11 @@ const createRentalIntoDB = async (req: Request) => {
         'Error updating bike availability',
       );
     }
+
+    // create and add transactionId
+    const transactionId = `TXN-${Date.now()}`;
+    rentalInfo.transactionId = transactionId;
+
     // create rental (write operation-02)
     const result = await Rental.create([rentalInfo], { session: session });
     if (!result) {
@@ -58,12 +64,21 @@ const createRentalIntoDB = async (req: Request) => {
       );
     }
 
+    //! payment
+    const paymentData = {
+      transactionId,
+      totalCost: 100,
+      customerEmail: authUser.email,
+    };
+
+    const paymentSession = await initiatePayment(paymentData);
+
     // commit transaction
     await session.commitTransaction();
     // end session
     await session.endSession();
 
-    return result;
+    return { result, paymentSession };
   } catch (err) {
     await session.abortTransaction();
     await session.endSession();
@@ -174,14 +189,14 @@ const getAllRentalsOfUserFromDB = async (req: Request) => {
 };
 
 //* get all rentals for admin dashboard
-const getAllRentalsFromDB=async()=>{
-  const result=await Rental.find();
+const getAllRentalsFromDB = async () => {
+  const result = await Rental.find();
   return result;
-}
+};
 
 export const RentalServices = {
   createRentalIntoDB,
   returnRentalIntoDB,
   getAllRentalsOfUserFromDB,
-  getAllRentalsFromDB
+  getAllRentalsFromDB,
 };

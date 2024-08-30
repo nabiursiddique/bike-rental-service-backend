@@ -8,4 +8,5 @@ export interface TRental {
   totalCost?: number;
   isReturned: boolean;
   isPaid: boolean;
+  transactionId?: string | null;
 }
