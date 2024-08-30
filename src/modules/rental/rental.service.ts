@@ -123,7 +123,7 @@ const returnRentalIntoDB = async (id: string) => {
   const pricePerHour = bike.pricePerHour;
 
   // calculating the total cost
-  const totalCost = timeDifference * pricePerHour;
+  const totalCost = timeDifference * pricePerHour - 100;
 
   // we will use session because of more than one write operation
   const session = await mongoose.startSession();
@@ -193,6 +193,8 @@ const getAllRentalsFromDB = async () => {
   const result = await Rental.find();
   return result;
 };
+
+//* full payment for my-rentals
 
 export const RentalServices = {
   createRentalIntoDB,
